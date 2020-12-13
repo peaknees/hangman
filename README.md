@@ -11,3 +11,8 @@ solver uses the following algorithm:
 3. guesses letter that has closest to 50% of words (binary search)
 
 solver was with inspiration from jan Misali's video: https://www.youtube.com/watch?v=le5uGqHKll8&ab_channel=janMisali
+
+# hangman 3.0
+i think that binary search isnt the optimal solution... 
+now the algorithm guesses letter that has the highest percentage of words containing that letter.
+ill be running it a while to collect some data to find out which version is better!
