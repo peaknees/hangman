@@ -12,10 +12,11 @@ wrongList = []
 posWords = [i.strip() for i in words if len(i.strip()) == len(word)]
 alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-#function to find optimal letter to guess via binary search, guesses letter if 100% inside
-def binLetter():
+#function to find letter with highest probability
+def maxLetter():
     d = {}
     total = len(posWords)
+    #print("total:", len(posWords))
     for letter in alphabets:
         count = 0
         for i in posWords:
@@ -23,16 +24,13 @@ def binLetter():
             if letter in wordLetters:
                 count += 1
         if count == total:
-            binletter = letter
-            return binletter
+            maxletter = letter
+            return maxletter
         if count > 0:
+            #print(letter, count)
             d[letter] = count/total
-#function to find dict value closest to 0.5, returns key corresponding to value
-    a_list = d.values()
-    absolute_difference_function = lambda list_value : abs(list_value - 0.5)
-    closest_value = min(a_list, key=absolute_difference_function)
-    binletter = list(d.keys())[list(d.values()).index(closest_value)]
-    return binletter
+    maxletter = max(d, key=d.get)
+    return maxletter
 
 #function to remove word based on letter position and letters that are not in word
 def wordRemover():
@@ -103,7 +101,7 @@ while True:
 
     guess = input("guess your letter: ").upper()
     if len(guess) < 1:
-        guess = binLetter()
+        guess = maxLetter()
         print("the best letter to guess is:", guess)
 
     # check if single letter and if already guessed
